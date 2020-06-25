@@ -16,6 +16,9 @@ class CreateAdminsTable extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('countryCode');
+            $table->integer('shop_id');
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }
