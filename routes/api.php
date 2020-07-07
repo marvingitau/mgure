@@ -17,9 +17,16 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::prefix('su')->group(function(){
-    Route::post('lorem','loremController@index');
-    Route::get('/','su\DashboardController@index');
+// Route::prefix('su')->group(function(){
+//     Route::post('lorem','loremController@index');
+//     Route::get('/','SU\DashboardController@index');
+// });
+
+
+Route::group(['prefix'=>'SU','namespace'=>'SU'],function(){
+    Route::get('/','SuperUserController@index');
+    Route::post('/Register','SuperUserController@register');
+    Route::post('/Login','SuperUserController@login');
 });
 
-Route::get('admins','SuperUSerController@index');
+// Route::get('admins','SU\SuperUSerController@index');

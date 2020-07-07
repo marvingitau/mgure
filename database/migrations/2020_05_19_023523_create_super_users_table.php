@@ -16,6 +16,9 @@ class CreateSuperUsersTable extends Migration
         Schema::create('super_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('api_token',80)->after('name')->unique()->nullable()->default(null);
+            $table->string('role')->default('0');
+            $table->text('password');
             $table->timestamps();
         });
     }

@@ -17,15 +17,10 @@ class SuResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'name' => $this->name
-            // 'body' => $this->body
+            'name' => $this->name,
+            'shop_id' => $this->shop_id
         ];
     }
 
-    public function with($request) {
-        return [
-            'version' => '1.0.0',
-            'author_url' => url('http://')
-        ];
-    }
+
 }

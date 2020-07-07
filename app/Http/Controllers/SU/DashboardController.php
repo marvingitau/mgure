@@ -17,30 +17,44 @@ class DashboardController extends Controller
     // }
     public function index(){
         // dd(Carbon::now());
-        $total_chart = $this->chartData();
+        // $this->chartData();
         // $total_chart = Admin::whereYear('created_at', '=', date('Y'))->get()->groupBy(function() {
         //     return 'created_at';
         // });
-        return view('backend.SUAdmin.index',compact('total_chart'));
+        // return view('backend.SUAdmin.index',compact('total_chart'));
+
+
+        $admnList = Admin::orderBy('created_at','desc')->paginate(5);
+        return SUresource::collection($admnList);
 
     }
     public function chartData()
     {
-        $admin_list = Admin::whereYear('created_at', '=', date('Y'))->get()->groupBy(function() {
-            return 'created_at';
-        });
 
-        $monthly_chart =collect([]);
-        foreach (month_arr() as $key => $value) {
-            $monthly_chart->push([
-                'month' => Carbon::parse(date('Y').'-'.$key)->format('Y-m'),
-                'admin_list' =>$admin_list->has($value)?$admin_list[$value]->count():0,
+       /* $admin_list = Admin::whereYear('created_at', '=', date('Y'))->get()->groupBy(function() {
+            return 'countryCode';
+        })->toArray();*/
 
-            ]);
+        // $admin_list = Admin::whereYear('created_at', '=', date('Y'))->get()->groupBy( 'created_at');
+        //  dd($admin_list);
 
-        }
-        return response()->json($monthly_chart->toArray())->content();
 
-        // return response(['data'=>$admin_list]);
+
+        // $admin_list2 = Admin::orderBy('created_by','asc')->paginate(5);
+        // return SUresource::collection($admin_list2);
+
+
+        // $monthly_chart =collect([]);
+        // foreach (month_arr() as $key => $value) {
+        //     $monthly_chart->push([
+        //         'month' => Carbon::parse(date('Y').'-'.$key)->format('Y-m'),
+        //         'admin_list' =>$admin_list->has($value)?$admin_list[$value]->count():0,
+
+        //     ]);
+
+        // }
+        // return response()->json($monthly_chart->toArray())->content();
+
+        // return response($admin_list2);
     }
 }
